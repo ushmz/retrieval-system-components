@@ -5,9 +5,11 @@ type SearchResultSingleProps = {
   title: string;
   url: string;
   snippet: string;
+  onResultClick?: () => void;
   suggestion?: {
     title: string;
     child: JSX.Element;
+    onClick?: () => void;
   };
 };
 
@@ -17,7 +19,12 @@ export const SearchResultSingle: React.FC<SearchResultSingleProps> = (
   return (
     <StyledRootContainer className="g">
       <StyledPageInfoArea>
-        <StyledAnchor href={props.url} target="_blank" rel="noreferrer">
+        <StyledAnchor
+          href={props.url}
+          target="_blank"
+          rel="noreferrer"
+          onClick={props.onResultClick}
+        >
           <br />
           <h3 style={styles.pageTitle}>{props.title}</h3>
           <div style={styles.pageUrlPosition}>
@@ -32,7 +39,12 @@ export const SearchResultSingle: React.FC<SearchResultSingleProps> = (
       {props.suggestion && (
         <StyledSuggestionArea>
           <h4 style={styles.suggestionTitle}>{props.suggestion.title}</h4>
-          <div style={styles.suggestionComponent}>{props.suggestion.child}</div>
+          <div
+            style={styles.suggestionComponent}
+            onClick={props.suggestion.onClick}
+          >
+            {props.suggestion.child}
+          </div>
         </StyledSuggestionArea>
       )}
     </StyledRootContainer>
