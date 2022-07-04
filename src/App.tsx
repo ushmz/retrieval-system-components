@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { SerpPagination } from "./Components/Pagination";
 import { SearchBar } from "./Components/SearchBar";
-import { SearchResultSingle } from "./Components/SearchResultSingle";
+import { SearchResult } from "./Components/SearchResult";
 
 const sampleResultProps = {
   title: "Sample page title",
@@ -29,20 +29,23 @@ function App(): React.ReactElement {
       <div style={styles.serpArea}>
         {[...Array(1).keys()].map((_, idx) => {
           return (
-            <SearchResultSingle
+            <SearchResult
               key={idx}
               title={"Sample search result component with suggestion area"}
               url={sampleResultProps.url}
               snippet={sampleResultProps.snippet}
-              suggestion={sampleResultProps.suggestion}
-            />
+            >
+              <div>
+                <p>Suggestion Area</p>
+              </div>
+            </SearchResult>
           );
         })}
 
         {/* If nothing passed for `suggestion` prop, nothing appears as a suggestion component. */}
         {[...Array(1).keys()].map((_, idx) => {
           return (
-            <SearchResultSingle
+            <SearchResult
               key={idx}
               title={"Sample search result component without suggestion area"}
               url={sampleResultProps.url}
